@@ -1,0 +1,13 @@
+.contentbox .list-group .list-group-item:first-child , .contentbox .list-group .list-group-item:last-child{
+    border-radius: 0px;
+}
+.contentbox .list-group{
+    margin-bottom:0px;
+}
+.contentbox .collapsed .glyphicon-chevron-up:before{
+    content:'\e114';
+}
+.contentbox .nav{
+    margin-left:-15px;
+    border-radius:0px;
+}
