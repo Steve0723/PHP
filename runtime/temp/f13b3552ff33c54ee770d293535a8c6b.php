@@ -1,0 +1,114 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"D:\wamp\www\gdhb.com\public/../application/admin\view\login\login.html";i:1530585246;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>登陆</title>
+    <link rel="stylesheet" href="/statics/style/bootstrap.min.css" />
+    <link rel="stylesheet" href="/statics/style/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="/statics/style/login.css"/>
+    <script src="/statics/js/vue.js" type="text/javascript"></script>
+    <script src="/statics/js/axios.min.js"></script>
+</head>
+<body>
+
+<form action="#" id="loginForm" @keyup.13="loginSubmit" method="post" class="form-horizontal col-sm-5 login-form">
+    <div class="form-group has-feedback">
+        <label class="control-label col-sm-2">账号:</label>
+        <div class="col-sm-8">
+            <span class="form-control-feedback glyphicon glyphicon-user"></span>
+            <input type="text" v-model="loginData.username" class="form-control"/>
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <label class="control-label col-sm-2">密码:</label>
+        <div class="col-sm-8">
+            <span class="form-control-feedback glyphicon glyphicon-lock"></span>
+            <input type="password" v-model="loginData.password" class="form-control"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">验证码</label>
+        <div class="col-sm-4">
+            <input type="text" v-model="loginData.vcode" class="form-control"/>
+        </div>
+        <div class="col-sm-3">
+            <img class="img-thumbnail" v-bind:src="vcodeURL" onclick="javascript:this.src='<?php echo url("admin/Tool/vcode"); ?>?'+Math.random()"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2 text-danger">
+            {{message}}
+        </div>
+    </div>
+    <div class="form-group">
+        <!--数据-->
+        <button type="button" @click="loginSubmit" class="col-sm-3 col-sm-offset-2 btn">登陆</button>
+        <button type="reset" class="col-sm-3 col-sm-offset-2 btn">重置</button>
+    </div>
+</form>
+<div class="animateLogin animateLeft"></div>
+<div class="animateLogin animateRight"></div>
+<script>
+    window.onload=function(){
+        var vm=new Vue({
+            el:'#loginForm',//选定一个组件容器
+            data:{
+                //数据名称
+                loginData:{
+                    username:'',
+                    password:'',
+                    vcode:''
+                },
+                message:'',
+                vcodeURL:"<?php echo url('admin/Tool/vcode'); ?>"
+            },
+            methods:{
+                //方法
+                loginSubmit:function(){
+                    var postData=this.loginData;
+                    var o=this;
+                    axios.post('<?php echo url("admin/Login/doLogin"); ?>',postData).then(function(da){
+                        o.message=da.data.msg;
+                        //登陆ajax后台验证完成以后再刷新验证码
+                        this.vcodeURL="<?php echo url('admin/Tool/vcode'); ?>?"+Math.random();
+                        //判断登陆状态 如果状态为2登陆成功
+                        if(da.data.status==2){
+                            //setInterval();设置一个定时器 每隔2秒执行一次 2000ms
+                            setInterval(function(){
+                                //跳转
+                                location.href='<?php echo url("admin/Index/index"); ?>';
+                            },2000);
+
+                        }
+                    }).catch(function(){
+                        alert('请求失败!稍后重试!');
+                    });
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
