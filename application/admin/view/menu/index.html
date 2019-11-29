@@ -1,0 +1,57 @@
+
+        <div class="col-sm-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    后台菜单管理
+                </div>
+                <div id="demo">
+        <ul>
+            <item v-for="(child,index) in dataTree" v-bind:model="child"></item>
+        </ul>
+    </div>
+    <script type="text/x-template" id="item-template">
+        
+            <li><div @click="toggle">{{model.title}}<a href="">修改</a><a href="{:url('admin/menu/delete')}">删除</a></div>
+                <ul v-if="hasChild" v-show="open">
+                    <item @click="toggle" v-for="(child,index) in model.children" v-bind:model="child">
+                        {{child.title}}<a href="">修改</a><a href="">删除</a>
+                    </item>
+                </ul>
+            </li>
+        
+    </script>
+    <script>
+        
+        Vue.component('item',{
+            template:'#item-template',
+            data:function(){
+                return {
+                    open:false
+                }
+            },
+            props:{
+                model:Object
+            },
+            computed:{
+                hasChild:function(){
+                    return this.model.children&&this.model.children.length;
+                }
+            },
+            methods:{
+                toggle:function(){
+                    if(this.hasChild){
+                        this.open=!this.open;
+                    }
+                }
+            }
+        });
+        var vm=new Vue({
+            el:'#demo',
+            data:{
+                dataTree:{$json}
+            }
+        });
+    </script>
+            </div>
+        </div>
+
