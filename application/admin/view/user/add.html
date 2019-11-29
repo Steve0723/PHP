@@ -1,0 +1,68 @@
+
+<div class="col-sm-10">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            添加管理员
+        </div>
+        <div class="panel-body">
+            <form action="" method="" name="fileForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">头像:</label>
+                    <div class="col-sm-4">
+                        <img id="uploadImg" name="imgsrc" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNjQ1ZGUwZDQyMCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE2NDVkZTBkNDIwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" class="img-thumbnail"/>
+                    </div>
+                    <iframe style="display:none;" name="iframeImg" src="{:url('admin/tool/uploadImg')}"></iframe>
+                    <script>
+                        //
+                        window.onload=function(){
+                            $('#uploadImg').click(function(){
+                                //触发事件
+                                iframeImg.formImg.fileImg.click();
+                            });
+
+                        }
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">用户名:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="username"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">密码:</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" name="password"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">确认密码:</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" name="confirmpassword"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">年龄:</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" name="age"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">性别:</label>
+                    <div class="col-sm-4">
+                        <input type="radio" name="gender" value="1"/><label>男</label>
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="gender" value="2"/><label>女</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary">添加管理员</button>
+                        <button type="reset" class="btn btn-danger">清空数据</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
