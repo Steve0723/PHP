@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>vue Tree</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style>
+		.btree,.btree ul{
+			list-style: none;
+			padding-left:40px;
+		}
+		.btree li{
+			line-height: 20px;
+			font-size:14px;
+			position: relative;
+		}
+		.btree li:before{
+			content:' ';
+			position:absolute;
+			top:10px;
+			width:40px;
+			left:-40px;
+			border-top:1px solid #000;
+		}
+		.btree li:after{
+			content:' ';
+			position:absolute;
+			top:0px;
+			left:-40px;
+			bottom:0px;
+			border-left:1px solid #000;
+		}
+		.btree li:last-child:after{
+			height:10px;
+		}
+		.btree>li:first-child:after{
+			top:10px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="demo">
+		<ul class="btree">
+			<item v-for="(child,index) in dataTree" v-bind:model="child"></item>
+		</ul>
+	</div>
+	<script type="text/x-template" id="item-template">
+		
+			<li><div @click="toggle">{{model.name}}<a href="">修改</a><a href="">删除</a><span v-if="hasChild">{{open?'-':'+'}}</span></div>
+				<ul v-if="hasChild" v-show="open">
+					<item @click="toggle" v-for="(child,index) in model.children" v-bind:model="child">
+						{{child.name}}<a href="">修改</a><a href="">删除</a>
+					</item>
+				</ul>
+			</li>
+		
+	</script>
+	<script>
+		
+		Vue.component('item',{
+			template:'#item-template',
+			data:function(){
+				return {
+					open:false
+				}
+			},
+			props:{
+				model:Object
+			},
+			computed:{
+				hasChild:function(){
+					return this.model.children&&this.model.children.length;
+				}
+			},
+			methods:{
+				toggle:function(){
+					if(this.hasChild){
+						this.open=!this.open;
+					}
+				}
+			}
+		});
+		var vm=new Vue({
+			el:'#demo',
+			data:{
+				dataTree:[
+						{
+						name:'1级菜单',
+						children:[
+							{name:'2级菜单',
+								children:[
+									{name:'3级菜单'},
+									{name:'3级菜单'},
+									{
+										name:'3级菜单',
+										children:[
+											{name:'4级菜单'},
+											{name:'4级菜单'},
+											{name:'4级菜单'},
+										]
+									},
+								]
+							},
+							{name:'2级菜单'},
+							{
+								name:'2级菜单',
+								children:[
+									{name:'3级菜单'},
+									{name:'3级菜单'},
+									{
+										name:'3级菜单',
+										children:[
+											{name:'4级菜单'},
+											{name:'4级菜单'},
+											{name:'4级菜单'},
+										]
+									},
+								]
+							},
+						]
+					},
+					{
+						name:'1级菜单',
+						children:[
+							{name:'2级菜单'},
+							{name:'2级菜单'},
+							{
+								name:'2级菜单',
+								children:[
+									{name:'3级菜单'},
+									{name:'3级菜单'},
+									{
+										name:'3级菜单',
+										children:[
+											{name:'4级菜单'},
+											{name:'4级菜单'},
+											{name:'4级菜单'},
+										]
+									},
+								]
+							},
+						]
+					}
+					]
+			}
+		});
+	</script>
+</body>
+</html>
